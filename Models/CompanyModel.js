@@ -11,7 +11,7 @@ export const createCompanyModel = (sequelize, DataTypes) => {
         },
         phone_number:{
             type:DataTypes.INTEGER,
-            allowNull:false
+            allowNull:true
         },
         capital:{
             type:DataTypes.FLOAT,

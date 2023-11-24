@@ -4,15 +4,18 @@ const Company = db.Companies;
 // 1. Create new company
 const addCompany = async (req, res) => {
     let info = {
-        name: req.body.name
+        name: req.body.name,
+        phone_number: req.body.phone_number,
+        capital:req.body.capital,
+        balance:req.body.balance
     };
 
     try {
         const company = await Company.create(info);
         res.status(200).send(company);
     } catch (error) {
-        console.error("Error creating role:", error);
-        res.status(500).send("Internal Server Error");
+        console.error("Error creating company:", error);
+        res.status(500).send(`Internal Server Error, ${error}`);
     }
 };
 // 2. get all companies
@@ -31,7 +34,7 @@ const getOneCompany = async (req, res) => {
 const updateCompany = async (req, res) => {
     let id = req.params.id;
     const company = await Company.update(req.body, { where: { id: id } });
-    res.status(200).send(role);
+    res.status(200).send(company);
 }
 // 5. delete company
 const deleteCompany = async (req, res) => {

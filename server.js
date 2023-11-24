@@ -2,7 +2,7 @@ import  express from "express";
 import dotenv from 'dotenv'
 import cors from 'cors';
 import roleRouter from './routes/roleRoute.js';
-import companyroute from'./routes/companyroute.js';
+import companyroute from'./routes/companyRoute.js';
 
 dotenv.config()
 const app = express();

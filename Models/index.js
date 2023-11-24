@@ -2,6 +2,7 @@
 import { dbConfig } from "../config/dbConfig.js";
 import { Sequelize, DataTypes } from "sequelize";
 import { createRoleModel } from './RoleModel.js';
+import { createCompanyModel } from "./CompanyModel.js"; 
 
 const sequelize = new Sequelize(
     dbConfig.DB,
@@ -35,6 +36,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.Roles = createRoleModel(sequelize, DataTypes);
+db.Companies = createCompanyModel(sequelize,DataTypes);
 
 db.sequelize.sync({ force: false })
     .then(() => {
