@@ -14,10 +14,14 @@ export const createCompanyModel = (sequelize, DataTypes) => {
             allowNull:true
         },
         capital:{
-            type:DataTypes.FLOAT,
+            type:DataTypes.INTEGER,
+            allowNull:false
+
         }, 
         balance:{
-            type:DataTypes.FLOAT,
+            type:DataTypes.INTEGER,
+            allowNull:false
+
         }
     },
 

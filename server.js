@@ -2,7 +2,11 @@ import  express from "express";
 import dotenv from 'dotenv'
 import cors from 'cors';
 import roleRouter from './routes/roleRoute.js';
-import companyroute from'./routes/companyRoute.js';
+import goalRouter from './routes/goalRoute.js';
+import userRouter from './routes/userRoute.js';
+import categoryRouter from './routes/categoryRoute.js';
+import companyRouter from './routes/companyRoute.js';
+
 
 dotenv.config()
 const app = express();
@@ -42,4 +46,7 @@ app.listen (process.env.PORT ,()=>{
 
 //routes
 app.use('/api/roles',roleRouter);
-app.use('/api/companies',companyroute)
+app.use('/api/users',userRouter);
+app.use('/api/goals',goalRouter);
+app.use('/api/categories',categoryRouter);
+app.use('/api/companies',companyRouter);
