@@ -49,3 +49,4 @@ app.use('/api/users',userRouter);
 app.use('/api/goals',goalRouter);
 app.use('/api/categories',categoryRouter);
 app.use('/api/transactions',transactionRouter);
+app.use('/api/companies',companyRouter);
