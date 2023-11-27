@@ -6,6 +6,7 @@ import goalRouter from './routes/goalRoute.js';
 import userRouter from './routes/userRoute.js';
 import categoryRouter from './routes/categoryRoute.js';
 import transactionRouter from './routes/transactionRoute.js';
+import companyRouter from './routes/companyRoute.js'
 
 dotenv.config()
 const app = express();

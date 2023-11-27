@@ -29,6 +29,23 @@ export const createUserModel = (sequelize, DataTypes) => {
     }, {
         timestamps: false
     });
+     // Generate authentication token
+     User.prototype.generateAuthToken = function () {
+        const token = jwt.sign({ id: this.id, role_id: this.role_id }, process.env.JWT_KEY);
+        resizeBy.status(200).send({ 
+            id: this.id,
+            email: this.email,
+            accessToken: token,
+         });
+    };
+
+    // Verify password
+    User.prototype.validPass = async function (password) {
+         await bcrypt.compare(password, this.password);
+         if (!validPass|| !User){
+            return res.status(404).json('Invalid password');
+         }
+    };
 
     return User;
 };
