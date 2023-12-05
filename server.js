@@ -11,13 +11,13 @@ import companyRouter from './routes/companyRoute.js'
 dotenv.config()
 const app = express();
 
-var corOptions = {
-  origin: 'http://localhost:82'
-}
+// var corOptions = {
+//   origin: 'http://localhost:82'
+// }
 
 
 //middleware
-app.use(cors(corOptions));
+app.use(cors());
 
 app.use(express.json())
 
