@@ -12,13 +12,16 @@ import {  verifyadmin,verifyAccountant,verifyFinancialManager } from './middelwa
 dotenv.config()
 const app = express();
 
-var corOptions = {
-  origin: 'http://localhost:82'
-}
+var corsOptions = {
+  origin: 'http://localhost:5173',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  optionsSuccessStatus: 204,
+};
+
 
 
 //middleware
-app.use(cors(corOptions));
+app.use(cors(corsOptions));
 
 app.use(express.json())
 
