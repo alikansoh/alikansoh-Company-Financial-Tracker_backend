@@ -1,7 +1,7 @@
 // TransactionController.js
 import { db } from "../Models/index.js";
 const Transaction = db.Transactions;
-
+import { Sequelize } from "sequelize";
 
 
 const addTransaction= async (req, res) => {
@@ -89,10 +89,39 @@ const deleteTransaction = async (req, res) => {
     res.status(200).send('User deleted');
 }
 
+
+
+const countTransactionByCategory = async (req, res) => {
+    try {
+        const { category } = req.body; 
+
+        if (!category) {
+            return res.status(400).json({ error: 'Category is required.' });
+        }
+
+    
+        const transactionCount = await Transaction.count({
+           
+            where: {
+                category_id: {
+                    [Sequelize.Op.eq]: category,
+                },
+            },
+        });
+
+    
+        res.json({ count: transactionCount });
+    } catch (error) {
+        console.error('Error counting transactions by category:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
 export {
     addTransaction,
     getAllTransaction,
     getOneTransaction,
     updateTransaction,
-    deleteTransaction
+    deleteTransaction,
+    countTransactionByCategory
 };

@@ -1,6 +1,7 @@
 import { db } from "../Models/index.js";
 
 const Company = db.Companies;
+const Transaction= db.Transactions
 // 1. Create new company
 const addCompany = async (req, res) => {
     let info = {
@@ -42,10 +43,29 @@ const deleteCompany = async (req, res) => {
     await Company.destroy({ where: { id: id } });
     res.status(200).send('deleted');
 }
+
+const getBalance = async (req, res) => {
+    try {
+      const transactions = await Transaction.findAll({});
+      let balance = 0;
+      transactions.forEach(transaction => {
+        if (transaction.transaction_type ) {
+          balance += transaction.amount;
+        } else  {
+          balance -= transaction.amount;
+        }
+      });
+      res.json({ balance });
+    } catch (error) {
+      res.status(500).json({ error: error.toString() });
+    }
+   };
+
 export {
     addCompany,
     getAllCompanies,
     getOneCompany,
     updateCompany,
-    deleteCompany
+    deleteCompany,
+    getBalance,
 };

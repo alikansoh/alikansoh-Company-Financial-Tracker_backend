@@ -3,9 +3,7 @@ import { db } from "../Models/index.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 const User = db.Users;
-import dotenv from "dotenv";
-dotenv.config();
-
+const Transaction =db.Transactions;
 const addUser = async (req, res) => {
   let info = {
     username: req.body.username,
@@ -95,6 +93,10 @@ const login = async (req, res, next) => {
   const token = jwt.sign({ id: user.id, role:user.role.name}, process.env.SECRET_STRING, {
     expiresIn: process.env.LOGIN_EXPIRES,
   });
-  res.status(200).json({ message: "success", token });
+  res.status(200).json({ message: "success", token ,user:user });
 };
+
+
+
+
 export { addUser, getAllUser, getOneUser, updateUser, deleteUser, login };

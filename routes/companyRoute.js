@@ -4,17 +4,18 @@ import {
     getAllCompanies,
     getOneCompany,
     updateCompany,
-    deleteCompany
+    deleteCompany,
+    getBalance
 } from '../Controllers/CompanyController.js';
 import { Router } from 'express';
 import { verifyadmin ,verifyToken} from '../middelware/auth.js';
 
 const router = Router();
 
-router.post('/company',verifyadmin, addCompany);
-router.get('/company',verifyToken, getAllCompanies);
-router.get('/company/:id',verifyToken, getOneCompany);
-router.patch('/company:id', verifyadmin,updateCompany);
-router.delete('/company/:id', verifyadmin,deleteCompany);
-
+router.post('/company', addCompany);
+router.get('/company',getAllCompanies);
+router.get('/company/:id', getOneCompany);
+router.patch('/company/:id',updateCompany);
+router.delete('/company/:id',deleteCompany);
+router.get('/balance',getBalance);
 export default router;
