@@ -7,7 +7,7 @@ const Transaction = db.Transactions;
 const addTransaction= async (req, res) => {
     let info = {
         amount: req.body.amount,
-        data: req.body.data,
+        date: req.body.date,
         description: req.body.description,
         user_id: req.body.user_id,
         category_id: req.body.category_id,
@@ -21,7 +21,7 @@ const addTransaction= async (req, res) => {
 
         catch (error) {
             console.error("Error creating Transaction:", error);
-            res.status(500).send("Internal Server Error");
+            res.status(500).send(error.message);
         }   
     };    
 
@@ -34,23 +34,32 @@ const getAllTransaction = async (req, res) => {
         // Fetch all transactions
         let transactions = await Transaction.findAll({
             include: [
-                { model: db.Users, as: "user" },
-                { model: db.Categories, as: "category" },
+                { 
+                  model: db.Users, 
+                  as: "user",
+                  attributes: ['id']
+                },
+                { 
+                  model: db.Categories, 
+                  as: "category",
+                  attributes: ['id', 'name']
+                },
             ],
         });
-
+  
         // Check if there are no Transactions
         if (transactions.length === 0) {
             res.status(404).send({ message: "No transactions in the database" });
             return;
         }
-
+  
         res.status(200).send(transactions);
     } catch (error) {
         console.error("Error fetching transactions:", error);
         res.status(500).send(error.message);
     }
-};
+  };
+  
 
 // 3. Get single Transactions
 const getOneTransaction = async (req, res) => {
