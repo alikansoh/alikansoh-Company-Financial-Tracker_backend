@@ -90,7 +90,7 @@ const login = async (req, res, next) => {
       .json({ message: "please enter a correct username or password" });
     return next(error);
   }
-  const token = jwt.sign({ id: user.id, role:user.role.name}, process.env.SECRET_STRING, {
+  const token = jwt.sign({ id: user.id, role:user.role.name, username:user.username}, process.env.SECRET_STRING, {
     expiresIn: process.env.LOGIN_EXPIRES,
   });
   res.status(200).json({ message: "success", token ,user:user });
