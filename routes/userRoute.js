@@ -13,7 +13,7 @@ import {verifyadmin, verifyToken} from '../middelware/auth.js'
 const router = Router();
 
 router.post('/user',verifyadmin, addUser);
-router.get('/user',getAllUser);
+router.get('/user', verifyToken,getAllUser);
 router.get('/user/:id',verifyToken, getOneUser);
 router.patch('/user/:id',verifyadmin, updateUser);
 router.delete('/user/:id',verifyadmin, deleteUser);
